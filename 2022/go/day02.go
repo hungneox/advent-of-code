@@ -12,35 +12,30 @@ type Key struct {
 }
 
 func calcScore(opponent, you string) int {
-	m := make(map[Key]int)
-	m[Key{"A", "X"}] = 0
-	m[Key{"A", "Y"}] = 1
-	m[Key{"A", "Z"}] = -1
-	m[Key{"B", "X"}] = -1
-	m[Key{"B", "Y"}] = 0
-	m[Key{"B", "Z"}] = 1
-	m[Key{"C", "X"}] = 1
-	m[Key{"C", "Y"}] = -1
-	m[Key{"C", "Z"}] = 0
-
-	return m[Key{opponent, you}]
-}
-
-func main() {
-	scanner := bufio.NewScanner(os.Stdin)
+	scores := map[Key]int{
+		{"A", "X"}: 3,
+		{"A", "Y"}: 6,
+		{"A", "Z"}: 0,
+		{"B", "X"}: 0,
+		{"B", "Y"}: 3,
+		{"B", "Z"}: 6,
+		{"C", "X"}: 6,
+		{"C", "Y"}: 0,
+		{"C", "Z"}: 3,
+	}
 
 	Shapes := map[string]int{
-		"A": 1, // Rock
-		"B": 2, // Paper
-		"C": 3, // Scissors
 		"X": 1, // Rock
 		"Y": 2, // Paper
 		"Z": 3, // Scissors
 	}
 
-	// Win = 6
-	// Draw = 3
-	// Lost = 1
+	return scores[Key{opponent, you}] + Shapes[you]
+}
+
+func main() {
+	scanner := bufio.NewScanner(os.Stdin)
+
 	score := 0
 	for scanner.Scan() {
 		line := strings.TrimRight(scanner.Text(), "\n")
@@ -48,13 +43,7 @@ func main() {
 		opponent := letters[0]
 		you := letters[1]
 
-		if calcScore(opponent, you) == 1 {
-			score += 6 + Shapes[you]
-		} else if calcScore(opponent, you) == 0 {
-			score += 3 + Shapes[you]
-		} else if calcScore(opponent, you) == -1 {
-			score += 0 + Shapes[you]
-		}
+		score += calcScore(opponent, you)
 	}
 
 	if scanner.Err() != nil {
