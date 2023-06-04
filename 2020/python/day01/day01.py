@@ -1,6 +1,9 @@
+import sys
+
 def read_input():
-    with open("day1_input.txt", "r") as file:
-        lines = file.readlines()
+    lines = []
+    for line in sys.stdin:
+        lines.append(line)
     return lines
 
 
@@ -9,6 +12,7 @@ if __name__ == "__main__":
     Advent of code 2020 - day 1
     --- Day 1: Calorie Counting ---
     https://adventofcode.com/2022/day/1
+    Run: python main.py < day1_input.txt
     """
 
     lines = read_input()
