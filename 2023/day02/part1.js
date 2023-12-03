@@ -28,6 +28,7 @@ const LIMIT = {
     'blue': 14,
 }
 
+
 for (const line of inputs) {
     const gameId = getGameId(line)
     const rawSets = removeGameId(line)
@@ -38,25 +39,13 @@ for (const line of inputs) {
         const choices = set.split(",")
         // console.log(choices)
         for (const choice of choices) {
-            if (choice.includes("red")) {
-                const value = parseInt(choice.replace("red", "").trim(), 10)
-                if (value > LIMIT["red"]) {
-                    isValid = false;
-                    break;
-                }
-            }
-            if (choice.includes("blue")) {
-                const value = parseInt(choice.replace("blue", "").trim(), 10)
-                if (value > LIMIT["blue"]) {
-                    isValid = false;
-                    break;
-                }
-            }
-            if (choice.includes("green")) {
-                const value = parseInt(choice.replace("green", "").trim(), 10)
-                if (value > LIMIT["green"]) {
-                    isValid = false;
-                    break;
+            for (const color of ['green', 'blue', 'red']) {
+                if (choice.includes(color)) {
+                    const value = parseInt(choice.replace(color, "").trim(), 10)
+                    if (value > LIMIT[color]) {
+                        isValid = false;
+                        break;
+                    }
                 }
             }
         }
