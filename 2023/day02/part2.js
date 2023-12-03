@@ -5,40 +5,8 @@ const inputs = data.split("\n");
 
 const gamePower = []
 
-const getGameWithId = (text) => {
-    const match = text.match(/^Game \d+/g)
-    const [game] = match
-    return game
-
-}
-const getGameId = (text) => {
-    return getGameWithId(text).split(" ")[1]
-}
-
-const removeGameId = (line) => {
-    const gameId = getGameWithId(line)
-
-    return line.replace(gameId + ":", "").trim()
-}
-
 const getChoiceValue = (text, color) => {
     return parseInt(text.replace(color, "").trim(), 10)
-}
-
-const isValidChoice = (choice) => {
-    return ['green', 'blue', 'red'].map((color) => {
-        if (choice.includes(color)) {
-            const value = getChoiceValue(choice, color)
-            if (value > LIMIT[color]) {
-                return false
-            }
-        }
-        return true
-    }).every((value) => value)
-}
-
-const isValidChoices = (choices) => {
-    return choices.map((choice) => isValidChoice(choice)).every((value) => value)
 }
 
 for (const line of inputs) {
