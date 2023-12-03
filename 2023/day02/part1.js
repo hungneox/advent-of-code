@@ -29,6 +29,26 @@ const LIMIT = {
 }
 
 
+const getChoiceValue = (text, color) => {
+    return parseInt(text.replace(color, "").trim(), 10)
+}
+
+const isValidChoice = (choice) => {
+    return ['green', 'blue', 'red'].map((color) => {
+        if (choice.includes(color)) {
+            const value = getChoiceValue(choice, color)
+            if (value > LIMIT[color]) {
+                return false
+            }
+        }
+        return true
+    }).every((value) => value)
+}
+
+const isValidChoices = (choices) => {
+    return choices.map((choice) => isValidChoice(choice)).every((value) => value)
+}
+
 for (const line of inputs) {
     const gameId = getGameId(line)
     const rawSets = removeGameId(line)
@@ -37,17 +57,11 @@ for (const line of inputs) {
     let isValid = true
     for (const set of sets) {
         const choices = set.split(",")
-        // console.log(choices)
-        for (const choice of choices) {
-            for (const color of ['green', 'blue', 'red']) {
-                if (choice.includes(color)) {
-                    const value = parseInt(choice.replace(color, "").trim(), 10)
-                    if (value > LIMIT[color]) {
-                        isValid = false;
-                        break;
-                    }
-                }
-            }
+
+        isValid = isValidChoices(choices)
+
+        if (!isValid) {
+            break
         }
     }
 
