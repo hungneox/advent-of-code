@@ -13,15 +13,12 @@ for (const line of inputs) {
     const rawSets = removeGameId(line)
     const sets = rawSets.split(";")
 
-
-
     let power = 0
     const MAXVALUES = new Map(Object.entries({
         'red': 0,
         'green': 0,
         'blue': 0,
     }))
-
 
     for (const set of sets) {
         const choices = set.split(",")
