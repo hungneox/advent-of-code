@@ -1,5 +1,5 @@
 const fs = require("fs");
-const data = fs.readFileSync(`./input1.txt`, "utf-8");
+const data = fs.readFileSync(`./input01.txt`, "utf-8");
 
 const inputs = data.split("\n");
 
@@ -15,10 +15,9 @@ for (const line of inputs) {
     matrix.push(line.trim("\r").split(""))
 }
 
-// console.table(matrix)
-const symbols = ['/', '!', '@', '#', '+', '-', '%', '*', '&', '^', '[', ']', ',', '{', '}', '~', '$']
+// const symbols = ['/', '!', '@', '#', '+', '-', '%', '*', '&', '^', '[', ']', ',', '{', '}', '~', '$', '=']
 
-const isSymbol = (input) => symbols.includes(input)
+const isSymbol = (input) => !isNumber(input) && input !== '.'
 
 const hasAdjacentSymbols = (row, col) => {
     return isSymbol(matrix[row][col - 1])
