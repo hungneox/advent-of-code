@@ -12,6 +12,7 @@ const getGameWithId = (text) => {
     return game
 
 }
+
 const getGameId = (text) => {
     return getGameWithId(text).split(" ")[1]
 }
@@ -27,7 +28,6 @@ const LIMIT = {
     'green': 13,
     'blue': 14,
 }
-
 
 const getChoiceValue = (text, color) => {
     return parseInt(text.replace(color, "").trim(), 10)
