@@ -21,10 +21,10 @@ for (const line of inputs) {
 const isSymbol = (input) => !isNumber(input) && input !== '.'
 
 const DIRECTIONS = [
-    [-1,-1],
+    [-1, -1],
     [-1, 0],
     [-1, 1],
-    [0,-1],
+    [0, -1],
     [0, 0],
     [0, 1],
     [1, 0],
@@ -33,7 +33,7 @@ const DIRECTIONS = [
 ]
 const hasAdjacentSymbols = (row, col) => {
     for (const [x, y] of DIRECTIONS) {
-        if (!!matrix[row+x] && !!matrix[row+x][col+y] && isSymbol(matrix[row+x][col+y])) {
+        if (!!matrix[row + x] && !!matrix[row + x][col + y] && isSymbol(matrix[row + x][col + y])) {
             return true
         }
     }
@@ -50,13 +50,9 @@ for (let row = 0; row < matrix.length; row++) {
         if (isNumber(current)) {
             temp += current
             isValids.push(hasAdjacentSymbols(row, col))
+        }
 
-            if (col === matrix[row].length - 1) {
-                if (temp !== '' && isValids.some((value) => !!value)) {
-                    numbers.push(Number(temp))
-                }
-            }
-        } else {
+        if (!isNumber(current) || col === matrix[row].length - 1) {
             if (temp !== '' && isValids.some((value) => !!value)) {
                 numbers.push(Number(temp))
             }
