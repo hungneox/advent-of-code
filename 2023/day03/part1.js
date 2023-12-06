@@ -1,5 +1,5 @@
 const fs = require("fs");
-const data = fs.readFileSync(`./input1.txt`, "utf-8");
+const data = fs.readFileSync(`./input.txt`, "utf-8");
 
 const inputs = data.split("\n");
 
@@ -20,16 +20,24 @@ for (const line of inputs) {
 
 const isSymbol = (input) => !isNumber(input) && input !== '.'
 
+const DIRECTIONS = [
+    [-1,-1],
+    [-1, 0],
+    [-1, 1],
+    [0,-1],
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1],
+    [1, -1]
+]
 const hasAdjacentSymbols = (row, col) => {
-    return (!!matrix[row][col - 1] && isSymbol(matrix[row][col - 1]))
-        || (!!matrix[row][col + 1] && isSymbol(matrix[row][col + 1]))
-        || (!!matrix[row - 1] && !!matrix[row - 1][col] && isSymbol(matrix[row - 1][col]))
-        || (!!matrix[row + 1] && !!matrix[row + 1][col] && isSymbol(matrix[row + 1][col]))
-        || (!!matrix[row - 1] && !!matrix[row - 1][col - 1] && isSymbol(matrix[row - 1][col - 1]))
-        || (!!matrix[row + 1] && !!matrix[row + 1][col + 1] && isSymbol(matrix[row + 1][col + 1]))
-        || (!!matrix[row - 1] && !!matrix[row - 1][col + 1] && isSymbol(matrix[row - 1][col + 1]))
-        || (!!matrix[row + 1] && !!matrix[row + 1][col - 1] && isSymbol(matrix[row + 1][col - 1]))
-        
+    for (const [x, y] of DIRECTIONS) {
+        if (!!matrix[row+x] && !!matrix[row+x][col+y] && isSymbol(matrix[row+x][col+y])) {
+            return true
+        }
+    }
+    return false
 }
 
 for (let row = 0; row < matrix.length; row++) {
