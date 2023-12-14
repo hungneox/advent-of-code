@@ -22,12 +22,12 @@ const main = () => {
     const points = [0]
     for (const line of inputs) {
         if (line === "") continue
-        
+
         const { winningNumbers, yourNumbers } = getNumbers(line);
         const intersect = yourNumbers.filter((x) => winningNumbers.includes(x))
 
         if (intersect.length > 0) {
-            points.push(2**(intersect.length-1))
+            points.push(2 ** (intersect.length - 1))
         }
     }
 
