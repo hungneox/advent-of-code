@@ -20,7 +20,7 @@ fn main() {
 fn find_numbers(input: &str) -> u32 {
     let mut numbers = Vec::new();
 
-    for char in input.chars() {``
+    for char in input.chars() {
         if char.is_ascii_digit() {
             numbers.push(char);
         }
