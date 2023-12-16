@@ -2,7 +2,7 @@ use std::fs::read_to_string;
 
 fn main() {
     println!("Advent of code 2023 - day 1 part 1");
-    let inputs = read_lines("./inputs/sample.txt");
+    let inputs = read_lines("./inputs/input.txt");
 
     let mut two_digits_numbers = Vec::new();
 
@@ -13,7 +13,7 @@ fn main() {
     }
 
     let total: u32 = two_digits_numbers.iter().sum();
-    println!("Vector<u32>{:?}", two_digits_numbers);
+    // println!("Vector<u32>{:?}", two_digits_numbers);
     println!("Result {}", total)
 }
 
