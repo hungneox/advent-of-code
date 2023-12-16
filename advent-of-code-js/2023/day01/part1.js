@@ -1,5 +1,5 @@
 const fs = require("fs");
-const data = fs.readFileSync(`./input01.txt`, "utf-8");
+const data = fs.readFileSync(`./input.txt`, "utf-8");
 
 const inputs = data.split("\n");
 
@@ -33,4 +33,4 @@ for (const line of inputs) {
   twoDigitsNumbers.push(parseInt(number, 10));
 }
 
-console.log(twoDigitsNumbers.reduce((a,b) => a + b, 0))
+console.log(twoDigitsNumbers.reduce((a, b) => a + b, 0))
